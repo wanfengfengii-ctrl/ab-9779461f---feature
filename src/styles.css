@@ -181,6 +181,46 @@ code.code.reserved { background: #fef2f2; border-color: #fecaca; color: #991b1b;
 .node-label { font-size: 10px; text-anchor: middle; fill: var(--ink); }
 .node-code { font-size: 10px; text-anchor: middle; fill: var(--muted); font-family: var(--mono); }
 
+/* 单比特串扰审计：两条涉及路径的高亮（蓝＝原帧，橙＝误报帧，紫＝共用） */
+.edge.hl-orig { stroke: #2563eb; stroke-width: 2.6; }
+.edge.hl-dec { stroke: #ea580c; stroke-width: 2.6; }
+.edge.hl-both { stroke: #7c3aed; stroke-width: 2.8; }
+.node.hl-orig circle { stroke: #2563eb; stroke-width: 3; }
+.node.hl-dec circle { stroke: #ea580c; stroke-width: 3; }
+.node.hl-both circle { stroke: #7c3aed; stroke-width: 3; }
+tr.hl-orig td { background: #eff6ff; }
+tr.hl-dec td { background: #fff7ed; }
+tr.hl-both td { background: #f5f3ff; }
+
+.legend { font-weight: 600; white-space: nowrap; }
+.legend.orig { color: #2563eb; }
+.legend.dec { color: #ea580c; }
+.legend.both { color: #7c3aed; }
+
+.audit-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 8px 0 10px;
+}
+.audit-controls label { font-size: 0.9rem; }
+.audit-controls input { width: 90px; }
+
+.audit-witness th {
+  white-space: nowrap;
+  width: 9em;
+  background: #f8fafc;
+}
+.audit-witness .hint { display: block; font-size: 0.75rem; }
+.flip-bit {
+  color: #dc2626;
+  background: #fef2f2;
+  border-radius: 3px;
+  padding: 0 2px;
+  text-decoration: underline;
+}
+
 .site-footer {
   text-align: center;
   color: var(--muted);
