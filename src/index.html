@@ -47,6 +47,25 @@
       <h2>② 编配结果</h2>
       <div id="results"></div>
     </section>
+
+    <section id="audit-panel" class="panel" aria-label="单比特串扰审计" hidden>
+      <div class="panel-head">
+        <h2>③ 单比特串扰审计</h2>
+      </div>
+      <p class="hint">
+        针对当前<b>仍有效</b>的码表，联合枚举每个合法帧（1 至上限条警报连续发送）的连续编码、
+        每一个反转位置，以及受扰比特串的<b>完整精确解码</b>，判定一次 0/1 反转是否会被
+        完整误解为另一帧警报（码词边界可漂移，故不比较单条码字、也不抽样）。
+      </p>
+      <div class="audit-form">
+        <label for="frame-limit">一帧连续发送的警报条数上限（2–10）</label>
+        <div class="audit-controls">
+          <input type="number" id="frame-limit" min="2" max="10" step="1" value="3">
+          <button type="button" id="run-audit" class="btn primary audit-btn">执行审计</button>
+        </div>
+      </div>
+      <div id="audit-result"></div>
+    </section>
   </main>
 
   <footer class="site-footer">

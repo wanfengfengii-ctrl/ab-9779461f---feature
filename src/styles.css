@@ -40,8 +40,13 @@ body {
   margin: 0 auto;
   align-items: start;
 }
+/* 左列录入，右列上下排列码表与串扰审计 */
+#input-panel { grid-column: 1; grid-row: 1 / span 2; }
+#result-panel { grid-column: 2; grid-row: 1; }
+#audit-panel { grid-column: 2; grid-row: 2; }
 @media (max-width: 980px) {
   .layout { grid-template-columns: 1fr; }
+  #input-panel, #result-panel, #audit-panel { grid-column: 1; grid-row: auto; }
 }
 
 .panel {
@@ -187,3 +192,95 @@ code.code.reserved { background: #fef2f2; border-color: #fecaca; color: #991b1b;
   font-size: 0.8rem;
   padding: 12px 24px 28px;
 }
+
+/* ---------------- 单比特串扰审计 ---------------- */
+
+.audit-form { margin: 10px 0 6px; }
+.audit-form > label { display: block; font-size: 0.9rem; margin-bottom: 6px; }
+.audit-controls { display: flex; gap: 10px; align-items: center; }
+.audit-controls input { width: 90px; }
+.audit-btn { width: auto; margin-top: 0; flex: 0 0 auto; }
+
+.audit-banner b { font-weight: 700; }
+.audit-banner ul { margin: 6px 0 0; padding-left: 20px; }
+
+/* 两条涉事路径在码树上的标示 */
+.edge.hl-orig { stroke: #2563eb; stroke-width: 3; }
+.edge.hl-decoded { stroke: #d97706; stroke-width: 3; }
+.edge.hl-both { stroke: #7c3aed; stroke-width: 3.4; }
+.edge-bit.hl-orig, .edge-bit.hl-decoded, .edge-bit.hl-both { fill: #334155; font-weight: 700; }
+.g.hl-orig circle { stroke: #2563eb; stroke-width: 3; }
+.g.hl-decoded circle { stroke: #d97706; stroke-width: 3; }
+.g.hl-both circle { stroke: #7c3aed; stroke-width: 3.4; }
+.tree-legend .swatch {
+  display: inline-block;
+  width: 14px;
+  height: 4px;
+  border-radius: 2px;
+  margin: 0 4px 0 10px;
+  vertical-align: middle;
+}
+.swatch.hl-orig { background: #2563eb; }
+.swatch.hl-decoded { background: #d97706; }
+.swatch.hl-both { background: #7c3aed; }
+
+/* 明细行上的涉事标示 */
+tr.audit-orig-row { background: #eff6ff; }
+tr.audit-decoded-row { background: #fffbeb; }
+tr.audit-orig-row.audit-decoded-row,
+tr.audit-decoded-row.audit-orig-row {
+  background: linear-gradient(90deg, #eff6ff 0 50%, #fffbeb 50% 100%);
+}
+.tag-row { margin-top: 3px; display: flex; gap: 4px; flex-wrap: wrap; }
+.tag {
+  display: inline-block;
+  font-size: 0.7rem;
+  border-radius: 4px;
+  padding: 0 6px;
+  line-height: 1.6;
+  white-space: nowrap;
+}
+.tag-orig { background: #dbeafe; color: #1d4ed8; border: 1px solid #93c5fd; }
+.tag-decoded { background: #fef3c7; color: #b45309; border: 1px solid #fcd34d; }
+
+/* 比特流明细 */
+h4 { margin: 14px 0 8px; font-size: 0.95rem; }
+.trace {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 10px 12px;
+  background: #fcfdfe;
+}
+.trace-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin: 6px 0; }
+.trace-row.trace-plain { align-items: baseline; }
+.trace-tag {
+  flex: 0 0 auto;
+  font-size: 0.78rem;
+  border-radius: 4px;
+  padding: 1px 8px;
+  background: #f1f5f9;
+  color: var(--muted);
+  border: 1px solid var(--line);
+}
+.trace-tag.tag-orig { font-size: 0.78rem; }
+.trace-tag.tag-decoded { font-size: 0.78rem; }
+.trace-bits { display: flex; align-items: center; gap: 2px; flex-wrap: wrap; }
+.seg { display: inline-flex; flex-direction: column; align-items: center; gap: 2px; }
+.seg-name { font-size: 0.72rem; color: var(--muted); }
+.seg-sep { color: #cbd5e1; font-family: var(--mono); align-self: flex-start; margin-top: 2px; }
+code.code .bit { white-space: pre; }
+.bit-flip {
+  background: #fee2e2;
+  color: #b91c1c;
+  border-radius: 3px;
+  font-weight: 700;
+  outline: 1px solid #fca5a5;
+}
+.decoded-seg code.code-decoded { background: #fffbeb; border-color: #fcd34d; color: #92400e; }
+code.stream {
+  letter-spacing: 0.12em;
+  font-size: 0.95rem;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+.stream-flip { background: #fef2f2; border-color: #fecaca; color: #991b1b; }
